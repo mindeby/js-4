@@ -8,11 +8,11 @@ class Phrase {
   constructor(phrase) {
     this.phrase = phrase.toLowerCase();
   }
-  addPhraseToDisplay(phrase){
+  addPhraseToDisplay(){ //creates html elements for each letter
     const display = document.querySelector( "#phrase ul" )
-    for (var i = 0; i < phrase.length; i++) {
+    for (var i = 0; i < this.phrase.length; i++) {
       let li = document.createElement('LI')
-      let letter = phrase.charAt(i);
+      let letter = this.phrase.charAt(i);
       display.append(li)
       li.append(letter)
       if (letter !== " ") {
@@ -22,19 +22,23 @@ class Phrase {
       }
     }
   }
-  checkLetter(){
-    // checks to see if the letter selected by the player matches a letter in the phrase.
+  checkLetter(selectedLetter){ //checks to see if it matches the target of the click event
+    const letters = [];
+    for (var i = 0; i < this.phrase.length; i++) {
+      letters.push(this.phrase.charAt(i));
+    }
+    const cleanLetters = letters //removing duplicates
+      .filter((letter, index) => letters.indexOf(letter) === index)
+    if (cleanLetters.indexOf(selectedLetter) !== -1) {
+      this.showMatchedLetter(selectedLetter) //if there is a match showMatchedLetter()
+    }
   }
-  showMatchedLetter(){
-    // reveals the letter(s) on the board that matches the player's selection. To reveal the matching letter(s), select all of the letter DOM elements that have a CSS class name that matches the selected letter and replace each selected element's hide CSS class with the show CSS class.
+  showMatchedLetter(letter){
+    const matchedLetters = document.getElementsByClassName(`${letter}`); //get elements with the same class name as the matched letter
+    for (var i = 0; i < matchedLetters.length; i++) {
+      matchedLetters[i].classList.remove('hide'); //change the styling for each
+      matchedLetters[i].classList.add('show');
+    }
   }
 
 }
-
-
-/*["A Lannister always pays his debts",
-               "Winter is coming",
-               "When you play the game of thrones you win or you die",
-               "You know nothing Jon Snow",
-               "The night is dark and full of terrors"];
-*/

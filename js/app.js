@@ -3,16 +3,14 @@
  * app.js */
 
   const startButton= document.getElementById("btn__reset");
-  const keyboardButtons= document.querySelectorAll(".key.button");
+  const keyboardButtons= document.querySelectorAll(".key");
 
   startButton.addEventListener('click',  () => {
     const newGame = new Game();
     newGame.startGame();
+    keyboardButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+          newGame.handleInteraction(event.target);
+        })
+    });
   });
-
-
-keyboardButtons.forEach(button => {
-    button.addEventListener('click', (event) => {
-      console.log(event.target)
-    })
-});
