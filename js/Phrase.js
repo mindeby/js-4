@@ -31,6 +31,7 @@ class Phrase {
       .filter((letter, index) => letters.indexOf(letter) === index)
     if (cleanLetters.indexOf(selectedLetter) !== -1) {
       this.showMatchedLetter(selectedLetter) //if there is a match showMatchedLetter()
+      return true;
     }
   }
   showMatchedLetter(letter){
