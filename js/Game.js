@@ -33,8 +33,10 @@
      event.target.disabled = true; //disables the selected key
    }
    removeLife(){
+     const scoreboard = document.querySelector( "#scoreboard ol" )
      this.missed += 1
      console.log(this.missed)
+     console.log(scoreboard.firstElementChild)
      if (this.missed === 5) {
        this.gameOver();
      }
