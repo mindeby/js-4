@@ -41,5 +41,4 @@ class Phrase {
       matchedLetters[i].classList.add('show');
     }
   }
-
 }
