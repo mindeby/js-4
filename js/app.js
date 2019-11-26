@@ -13,4 +13,7 @@
           newGame.handleInteraction(event.target);
         })
     });
+    document.addEventListener('keydown', (event) => {
+      newGame.handleInteraction(event.key)
+    })
   });

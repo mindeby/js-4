@@ -24,7 +24,7 @@
     return randomPhrase;
    }
    handleInteraction(){
-     if (this.activePhrase.checkLetter(event.target.innerText)) {
+     if (this.activePhrase.checkLetter(event.target.innerText) || this.activePhrase.checkLetter(event.key)) {
        event.target.classList.add('chosen')
        console.log("nice!")
      } else {
