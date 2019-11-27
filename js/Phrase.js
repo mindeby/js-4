@@ -10,6 +10,7 @@ class Phrase {
   }
   addPhraseToDisplay(){ //creates html elements for each letter
     const display = document.querySelector( "#phrase ul" )
+    display.innerHTML = ""; //remove all children li's
     for (var i = 0; i < this.phrase.length; i++) {
       let li = document.createElement('LI')
       let letter = this.phrase.charAt(i);
@@ -32,10 +33,12 @@ class Phrase {
     if (cleanLetters.indexOf(selectedLetter) !== -1) {
       this.showMatchedLetter(selectedLetter) //if there is a match showMatchedLetter()
       return true;
+    } else {
+      return false;
     }
   }
   showMatchedLetter(letter){
-    const matchedLetters = document.getElementsByClassName(`${letter}`); //get elements with the same class name as the matched letter
+    let matchedLetters = document.getElementsByClassName(`${letter}`); //get elements with the same class name as the matched letter
     for (var i = 0; i < matchedLetters.length; i++) {
       matchedLetters[i].classList.remove('hide'); //change the styling for each
       matchedLetters[i].classList.add('show');

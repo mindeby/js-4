@@ -15,7 +15,10 @@
      this.activePhrase = null;
    }
    startGame() {
+     console.log("you missed " + this.missed + " times")
      document.getElementById('overlay').style.display = "none" //hides the start screen overlay
+     document.getElementById('overlay').classList.add('start')
+     document.getElementById('overlay').classList.remove('lose', 'win')
      this.activePhrase = this.getRandomPhrase();
      this.activePhrase.addPhraseToDisplay();
    }
@@ -24,9 +27,9 @@
     return randomPhrase;
    }
    handleInteraction(){
-     if (this.activePhrase.checkLetter(event.target.innerText) || this.activePhrase.checkLetter(event.key)) {
+     console.log(this.missed)
+     if (this.activePhrase.checkLetter(event.target.innerText)) {
        event.target.classList.add('chosen')
-       console.log("nice!")
      } else {
        event.target.classList.add('wrong')
        this.removeLife();
@@ -35,47 +38,36 @@
      this.checkForWin()
    }
    removeLife(){
-     const scoreboard = document.querySelectorAll( "#scoreboard ol li" )
-     this.missed += 1
+     let scoreboard = document.querySelectorAll( "#scoreboard ol li" )
+      this.missed += 1;
      for (var i = 0; i < scoreboard.length; i++) {
          scoreboard[this.missed-1].firstElementChild.setAttribute('src',"images/lostheart.png" )
      }
-     if (this.missed === 5) {
-       this.gameOver('lose');
-       this.missed = 0;
-     }
    }
    checkForWin(){
-     const hiddenLetters = document.getElementsByClassName( "hide" );
+     console.log(this.missed)
+     console.log('checking for win')
+     let hiddenLetters = document.getElementsByClassName( "hide" );
+     console.log(hiddenLetters)
      if (hiddenLetters.length === 0) {
        this.gameOver('win');
+     } else if (this.missed === 5) {
+       this.gameOver('lose');
      }
    }
    gameOver(score){
-     document.getElementById('overlay').style.display = "block"
+     console.log(score)
      const overlay = document.getElementById('overlay')
+     overlay.classList.remove('win', 'lose')
+     overlay.style.display = "block"
      overlay.classList.remove('start')
      const message = document.getElementById('game-over-message')
-     resetGame();
      if (score === 'win'){
       message.innerText = "🥳"
       overlay.classList.add('win')
-     } else {
+    } else if (score === 'lose') {
        message.innerText = "😩"
        overlay.classList.add('lose')
      }
    }
  }
-
-function resetGame(){
-  document.querySelector( "#phrase ul" ).innerHTML = ""; //remove all children li's
-  const keyboardButtons= document.querySelectorAll(".key"); //keys back to inital state
-  keyboardButtons.forEach(button => {
-      button.disabled = false
-      button.classList.remove('wrong', 'chosen')
-  });
-  const scoreboard = document.querySelectorAll( "#scoreboard ol li" ) //hearts back to inital state
-  for (var i = 0; i < scoreboard.length; i++) {
-      scoreboard[i].firstElementChild.setAttribute('src',"images/liveheart.png" )
-  }
-}
