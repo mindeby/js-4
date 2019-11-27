@@ -17,20 +17,22 @@ function resetGame() {
   });
 }
 
+let game = new Game();
+
 startButton.addEventListener("click", () => {
   resetGame();
-  const newGame = new Game();
-  newGame.startGame();
-  keyboardButtons.forEach(button => {
-    button.addEventListener("click", event => {
-      newGame.handleInteraction(event.target);
-    });
-  });
+  game.startGame();
+});
   /*document.addEventListener('keydown', (event) => {
       newGame.handleInteraction(event.key)
     })*/
-});
 
+keyboardButtons.forEach(button => {
+  button.addEventListener("click", event => {
+    console.log("Gonna handle this…")
+    game.handleInteraction(event.target);
+  });
+});
 /*function resetGame(){
     overlay.classList.add('start')
     overlay.classList.remove('win', 'lose')
