@@ -63,7 +63,7 @@ class Game {
     }
     this.checkForWin();
   }
-  
+
   removeLife() {
     let scoreboard = document.querySelectorAll("#scoreboard ol li");
     this.missed += 1;
