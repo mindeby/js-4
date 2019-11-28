@@ -10,7 +10,10 @@ class Game {
       new Phrase("Winter is coming"),
       new Phrase("When you play the game of thrones you win or you die"),
       new Phrase("You know nothing Jon Snow"),
-      new Phrase("The night is dark and full of terrors")
+      new Phrase("The night is dark and full of terrors"),
+      new Phrase("The man who passes the sentence should swing the sword"),
+      new Phrase("The things I do for love"),
+      new Phrase("Hold the door")
     ];
     this.activePhrase = null;
   }
