@@ -23,9 +23,10 @@ startButton.addEventListener("click", () => {
   resetGame();
   game.startGame();
 });
-  /*document.addEventListener('keydown', (event) => {
-      newGame.handleInteraction(event.key)
-    })*/
+
+document.addEventListener('keydown', (event) => {
+  game.handleInteraction(event.key)
+})
 
 keyboardButtons.forEach(button => {
   button.addEventListener("click", event => {
@@ -33,17 +34,3 @@ keyboardButtons.forEach(button => {
     game.handleInteraction(event.target);
   });
 });
-/*function resetGame(){
-    overlay.classList.add('start')
-    overlay.classList.remove('win', 'lose')
-    document.querySelector( "#phrase ul" ).innerHTML = ""; //remove all children li's
-    const keyboardButtons= document.querySelectorAll(".key"); //keys back to inital state
-    keyboardButtons.forEach(button => {
-        button.disabled = false
-        button.classList.remove('wrong', 'chosen')
-    });
-    const scoreboard = document.querySelectorAll( "#scoreboard ol li" ) //hearts back to inital state
-    for (var i = 0; i < scoreboard.length; i++) {
-        scoreboard[i].firstElementChild.setAttribute('src',"images/liveheart.png" )
-    }
-  }*/

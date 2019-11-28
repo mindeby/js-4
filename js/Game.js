@@ -32,18 +32,38 @@ class Game {
   }
 
   handleInteraction() {
-    if (this.activePhrase.checkLetter(event.target.innerText)) {
-      console.log(`⭐️Right letter`);
-      event.target.classList.add("chosen");
-    } else {
-      console.log(`🛑Wrong letter`);
-      event.target.classList.add("wrong");
-      this.removeLife();
+    let eventType = event.type;
+    if (eventType === 'click') {
+      if (this.activePhrase.checkLetter(event.target.innerText)){
+        console.log(`⭐️Right letter`);
+        event.target.classList.add("chosen");
+      } else {
+        console.log(`🛑Wrong letter ${event.target.innerText}`);
+        event.target.classList.add("wrong");
+        this.removeLife();
+      }
+      event.target.disabled = true; // disables the selected key
+    } else if (eventType === 'keydown') {
+      if (this.activePhrase.checkLetter(event.key)) {
+        console.log(`⭐️Right letter`);
+        keyboardButtons.forEach(button => {
+          if (button.innerText === event.key && !button.classList.contains("chosen")){
+            button.classList.add("chosen")
+          }
+        });
+      } else {
+        console.log(`🛑Wrong letter ${event.key}`);
+        keyboardButtons.forEach(button => {
+          if (button.innerText === event.key && !button.classList.contains("wrong")){
+            button.classList.add("wrong")
+            this.removeLife();
+          }
+        });
+      }
     }
-    event.target.disabled = true; // disables the selected key
     this.checkForWin();
   }
-
+  
   removeLife() {
     let scoreboard = document.querySelectorAll("#scoreboard ol li");
     this.missed += 1;
