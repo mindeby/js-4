@@ -8,10 +8,7 @@ class Game {
     this.phrases = [
       new Phrase("A Lannister always pays his debts"),
       new Phrase("Winter is coming"),
-      new Phrase("When you play the game of thrones you win or you die"),
       new Phrase("You know nothing Jon Snow"),
-      new Phrase("The night is dark and full of terrors"),
-      new Phrase("The man who passes the sentence should swing the sword"),
       new Phrase("The things I do for love"),
       new Phrase("Hold the door")
     ];
@@ -36,17 +33,18 @@ class Game {
 
   handleInteraction() {
     let eventType = event.type;
-    if (eventType === 'click') {
+    if (eventType === 'click') { //if user clicked on a letter
       if (this.activePhrase.checkLetter(event.target.innerText)){
         console.log(`⭐️Right letter`);
         event.target.classList.add("chosen");
+        this.checkForWin();
       } else {
         console.log(`🛑Wrong letter ${event.target.innerText}`);
         event.target.classList.add("wrong");
         this.removeLife();
       }
-      event.target.disabled = true; // disables the selected key
-    } else if (eventType === 'keydown') {
+      event.target.disabled = true;
+    } else if (eventType === 'keydown') { //if user pressed key on keyboard
       if (this.activePhrase.checkLetter(event.key)) {
         console.log(`⭐️Right letter`);
         keyboardButtons.forEach(button => {
@@ -54,6 +52,7 @@ class Game {
             button.classList.add("chosen")
           }
         });
+        this.checkForWin();
       } else {
         console.log(`🛑Wrong letter ${event.key}`);
         keyboardButtons.forEach(button => {
@@ -64,7 +63,6 @@ class Game {
         });
       }
     }
-    this.checkForWin();
   }
 
   removeLife() {
@@ -77,14 +75,15 @@ class Game {
       );
     }
     console.log(`💔You missed ${this.missed}/5`);
+    if (this.missed === 5) {
+      this.gameOver("lose");
+    }
   }
 
   checkForWin() {
     let hiddenLetters = document.getElementsByClassName("hide");
     if (hiddenLetters.length === 0) {
       this.gameOver("win");
-    } else if (this.missed === 5) {
-      this.gameOver("lose");
     }
   }
 
