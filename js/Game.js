@@ -16,7 +16,6 @@ class Game {
   }
 
   startGame() {
-    console.log(`🆕Starting a new game:`);
     document.getElementById("overlay").style.display = "none"; // hides the start screen overlay
     document.getElementById("overlay").classList.add("start");
     document.getElementById("overlay").classList.remove("lose", "win");
@@ -35,18 +34,15 @@ class Game {
     let eventType = event.type;
     if (eventType === 'click') { //if user clicked on a letter
       if (this.activePhrase.checkLetter(event.target.innerText)){
-        console.log(`⭐️Right letter`);
         event.target.classList.add("chosen");
         this.checkForWin();
       } else {
-        console.log(`🛑Wrong letter ${event.target.innerText}`);
         event.target.classList.add("wrong");
         this.removeLife();
       }
       event.target.disabled = true;
     } else if (eventType === 'keydown') { //if user pressed key on keyboard
       if (this.activePhrase.checkLetter(event.key)) {
-        console.log(`⭐️Right letter`);
         keyboardButtons.forEach(button => {
           if (button.innerText === event.key && !button.classList.contains("chosen")){
             button.classList.add("chosen")
@@ -54,7 +50,6 @@ class Game {
         });
         this.checkForWin();
       } else {
-        console.log(`🛑Wrong letter ${event.key}`);
         keyboardButtons.forEach(button => {
           if (button.innerText === event.key && !button.classList.contains("wrong")){
             button.classList.add("wrong")
@@ -74,7 +69,6 @@ class Game {
         "images/lostheart.png"
       );
     }
-    console.log(`💔You missed ${this.missed}/5`);
     if (this.missed === 5) {
       this.gameOver("lose");
     }
@@ -95,10 +89,10 @@ class Game {
     const message = document.getElementById("game-over-message");
     this.missed = 0;
     if (score === "win") {
-      message.innerText = "🥳";
+      message.innerText = "You did great! 🥳";
       overlay.classList.add("win");
     } else if (score === "lose") {
-      message.innerText = "😩";
+      message.innerText = "Better luck next time 😩";
       overlay.classList.add("lose");
     }
   }

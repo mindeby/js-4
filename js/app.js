@@ -30,7 +30,6 @@ document.addEventListener('keydown', (event) => {
 
 keyboardButtons.forEach(button => {
   button.addEventListener("click", event => {
-    console.log("Gonna handle this…")
     game.handleInteraction(event.target);
   });
 });

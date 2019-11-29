@@ -37,10 +37,8 @@ li, ol, ul {
 }
 
 h2 {
-  margin: 0;
   text-transform: uppercase;
   font-size: var(--font-size-large);
-  margin: 0;
 }
 
 h1 {
@@ -73,6 +71,7 @@ button {
   height: 100%;
   max-height: 900px;
   text-align: center;
+  background-color: #D1EDF8;
 }
 
 .section {
@@ -98,10 +97,13 @@ button {
   height: 65px;
   width: 65px;
   padding: 20px 1px 0 1px;
-  margin-right: 2px;
+  margin-right: 3px;
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
+  -webkit-box-shadow: 10px 10px 30px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 30px -9px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 30px -9px rgba(0,0,0,0.75);
 }
 
 .space {
@@ -112,7 +114,7 @@ button {
 
 .show {
   color: #fff;
-  background-color: #4ac0d5;
+  background-color: #4E73BB;
   font-size: 20px;
   height: 65px;
   width: 65px;
@@ -135,6 +137,7 @@ button {
   width: 40px;
   height: 40px;
   padding: 0;
+  border: solid #95A0C0 1px;
 }
 
 .chosen {
@@ -225,4 +228,12 @@ button {
 
 .lose a {
   color: var(--color-lose);
+}
+#game-over-message {
+  font-size: 1.5em;
+  color: #292C33;
+  margin: 0 auto 50px auto;
+  background-color: white;
+  max-width: 350px;
+  border-radius: 15px;
 }
