@@ -17,19 +17,25 @@ function resetGame() {
   });
 }
 
-let game = new Game();
+let currentGame;
 
 startButton.addEventListener("click", () => {
   resetGame();
-  game.startGame();
+  let newGame = new Game();
+  currentGame = newGame;
+  currentGame.startGame();
 });
 
 document.addEventListener('keydown', (event) => {
-  game.handleInteraction(event.key)
+  if (currentGame) {
+    currentGame.handleInteraction(event.key)
+  }
 })
 
 keyboardButtons.forEach(button => {
   button.addEventListener("click", event => {
-    game.handleInteraction(event.target);
+    if (currentGame) {
+      currentGame.handleInteraction(event.target);
+    }
   });
 });

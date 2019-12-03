@@ -3,7 +3,7 @@
  * Game.js */
 
 class Game {
-  constructor(missed, phrases, activePhrase) {
+  constructor() {
     this.missed = 0;
     this.phrases = [
       new Phrase("A Lannister always pays his debts"),
